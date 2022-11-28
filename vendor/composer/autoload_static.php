@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
+class ComposerStaticInit46e9a241a6b02fe86f385943d48eb05a
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -43,11 +43,9 @@ class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
-            'Svg\\' => 4,
             'Slim\\Views\\' => 11,
             'Slim\\Psr7\\' => 10,
             'Slim\\' => 5,
-            'Sabberworm\\CSS\\' => 15,
         ),
         'P' => 
         array (
@@ -57,21 +55,11 @@ class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Phinx\\' => 6,
-            'PHPMailer\\PHPMailer\\' => 20,
-        ),
-        'M' => 
-        array (
-            'Masterminds\\' => 12,
         ),
         'F' => 
         array (
-            'FontLib\\' => 8,
             'Fig\\Http\\Message\\' => 17,
             'FastRoute\\' => 10,
-        ),
-        'D' => 
-        array (
-            'Dompdf\\' => 7,
         ),
         'C' => 
         array (
@@ -135,10 +123,6 @@ class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
         ),
-        'Svg\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
-        ),
         'Slim\\Views\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/twig-view/src',
@@ -150,10 +134,6 @@ class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
-        ),
-        'Sabberworm\\CSS\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
         ),
         'Psr\\SimpleCache\\' => 
         array (
@@ -181,18 +161,6 @@ class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
         array (
             0 => __DIR__ . '/..' . '/robmorgan/phinx/src/Phinx',
         ),
-        'PHPMailer\\PHPMailer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
-        ),
-        'Masterminds\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/masterminds/html5/src',
-        ),
-        'FontLib\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
-        ),
         'Fig\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/fig/http-message-util/src',
@@ -200,10 +168,6 @@ class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
-        ),
-        'Dompdf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
         ),
         'Cake\\Utility\\' => 
         array (
@@ -226,7 +190,6 @@ class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
@@ -238,9 +201,9 @@ class ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit68f4b8aa92e694783ec6ffb3303899fe::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit46e9a241a6b02fe86f385943d48eb05a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit46e9a241a6b02fe86f385943d48eb05a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit46e9a241a6b02fe86f385943d48eb05a::$classMap;
 
         }, null, ClassLoader::class);
     }
