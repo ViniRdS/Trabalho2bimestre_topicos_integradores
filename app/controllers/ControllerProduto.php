@@ -19,7 +19,7 @@ class ControllerProduto extends Base
         //RETORNAMOS A VIEW 
         return $this->getTwig()->render(
             $response,
-            $this->setView("lista"),
+            $this->setView("listaproduto"),
             [
                 "titulo" => "Lista de produtos",
                 "tituloModal" => "Dados do produto",

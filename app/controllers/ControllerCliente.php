@@ -19,7 +19,7 @@ class ControllerCliente extends Base
         //RETORNAMOS A VIEW 
         return $this->getTwig()->render(
             $response,
-            $this->setView("lista"),
+            $this->setView("listacliente"),
             [
                 "titulo" => "Lista de clientes",
                 "tituloModal" => "Dados do cliente",
