@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "css.html" %}
+    <title>{{ titulo }}</title>
+</head>
+
+<body>
+    {% include "nav.html" %}
+    
+    <!-- Modal -->
+    <div class="modal fade" id="cadastrocliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" name="frm" id="frm">
+                    <input type="text" id="id" name="id">
+                    <input type="text" id="acao" name="acao">
+                    <input type="text" id="tipo" name="tipo" class="esconder">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">{{ tituloModal }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            id="fecharX"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- AQUI TEMOS UMA LINHA -->
+                        <div class="row">
+                            <!-- AQUI TEMOS UMA COLUNA OCUPANDO 100% DO TAMANHO DA LINHA -->
+                            <div class="col-12">
+                                <!-- AQUI TEMOS O COMPONENTE ALERT -->
+                                <div id="alerta" class="alert alert-warning" role="alert">
+                                    <!-- AQUI TEMOS O TITULO DO ALERT DO BOOTSTRAP -->
+                                    <div id="titulo" class="mb-0">
+                                        <h6 class="alert-heading">Atenção!</h6>
+                                        Todos os campos com <span class="text-danger"> * </span> são obrigatórios para o
+                                        cadastro!
+                                    </div>
+                                    <!-- AQUI TEMOS SPINNER PARA MENSAGEM DE SALVANDO -->
+                                    <div id="carregando" class="mb-0 d-none">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <span>Salvando...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="inputs" class="">
+                                    <div class="form-group">
+                                        <label for="cpf_cnpj" class="form-label" id="labelCpf_Cnpj">{{ cpf_nome }}</label>
+                                        <input type="text" class="form-control" id="cpf_cnpj" name="cpf_cnpj" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nome_fantasia" class="form-label" id="labelNome_Fantasia">{{ nome_marca }}</label>
+                                        <input type="text" class="form-control" id="nome_fantasia" name="nome_fantasia"
+                                            required minlength="3">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sobrenome_razao" class="form-label"
+                                            id="labelSobrenome_Razao">{{ sobrenome_descricao }}</label>
+                                        <input type="text" class="form-control" id="sobrenome_razao"
+                                            name="sobrenome_razao" required minlength="3">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="rg_ie" class="form-label" id="labelRg_Ie">{{ rg_preco }}</label>
+                                        <input type="{{ type_rg_preco }}" class="form-control" id="rg_ie" name="rg_ie" minlength="6">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dtnascimento_abertura" class="form-label"
+                                            id="labelDtNascimento_Abertura">{{ dataNascimento_fabricacao }}</label>
+                                        <input type="date" class="form-control" id="dtnascimento_abertura"
+                                            name="dtnascimento_abertura" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="fechar">
+                            <i class="fa-solid fa-xmark"> </i> Fechar
+                        </button>
+                        <button id="btnsalvar" type="button" class="btn btn-success">
+                            <i class="fa-solid fa-floppy-disk"></i> Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="container">
+        <form id="clientes" name="clientes">
+            <input type="text" name="idcliente" id="idcliente">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button id="btncadastro" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#cadastrocliente">
+                                <i class="fa-solid fa-plus"> </i> Cadastrar
+                            </button>
+                            <button id="btnatualiza" type="button" class="btn btn-primary">
+                                <i class="fa-solid fa-rotate-right"> </i> Atualizar
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="pesquisa" name="pesquisa"
+                                            placeholder="O que você procura?">
+                                        <span class="input-group-text" id="btnPesquisar">
+                                            <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>{{ col2 }}</th>
+                                        <th>{{ col3 }}</th>
+                                        <th>{{ col4 }}</th>
+                                        <th>{{ col5 }}</th>
+                                        <th>{{ col6 }}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dados" class="table-group-divider">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+    </div>
+
+    {% include "script.html" %}
+    <script src="/assets/js/cliente.js"></script>
+</body>
+
+</html>

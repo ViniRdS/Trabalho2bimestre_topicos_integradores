@@ -1,0 +1,68 @@
+body{
+    background: linear-gradient(#ffffff 50%, rgba(255,255,255,0) 0) 0 0, radial-gradient(circle closest-side, #FFFFFF 53%, rgba(255,255,255,0) 0) 0 0, radial-gradient(circle closest-side, #FFFFFF 50%, rgba(255,255,255,0) 0) 55px 0 #48B;
+    background-size: 110px 200px;
+    background-repeat: repeat-x;
+
+}
+
+.div-radio{
+    display: inline-flex;
+    margin-left: 80px;
+}
+.div-radio label{
+    padding-left: 5px;
+}
+#idcliente, #id, #acao, .esconder{
+    visibility: hidden;
+    height: 0px;
+    display: flex;
+}
+.exibir-dialog{
+    max-width: none;
+    margin: 10px 10px 10px 10px;
+    height: 100%;
+}
+.exibir{
+    height: 100%;
+}
+.div-radio-exibir{
+    
+    width: 100%;
+}
+#exibir-div-radio-pf{
+    margin-left: 26%;
+    width: 30%;
+} 
+#exibir-div-radio-pj{
+    width: 30%;
+}
+table{
+    width: 100%;
+}
+body{
+    width: 100%;
+}
+.error{
+    color: red;
+}
+.holder {
+    display: flex;
+    justify-content: center;
+}
+.imagem {
+  width: 200px;
+  margin: 10px;
+  position: relative;
+  text-align: center;
+}
+.imagem::after {
+  content: attr(data-title);
+  position: absolute;
+  width: 100%;
+  bottom: -20px;
+  left: 0;
+}
+#container{
+    display: flex;
+    justify-content: center;
+}

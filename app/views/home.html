@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "css.html" %}
+    <link rel="stylesheet" href="/assets/css/index.css">
+    
+    <title>Home</title>
+</head>
+<body>
+    {% include "nav.html" %}
+    <section>
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="assets/images/cavalocorpo.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block text-h5">
+                    <h5>Ternos de altíssima qualidade para seu cavalo</h5>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="assets/images/WhatsApp Image 2022-10-29 at 5.27.13 PM.jpeg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block text-h5">
+                    <h5>Ternos para o dia a dia</h5>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/images/WhatsApp Image 2022-10-29 at 5.29.13 PM.jpeg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block" id="horse-pink">
+                    <h5>Ternos para ocasiões especiais</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <footer>
+    <h5>Desenvolvido por Suit Horse</h5>
+    </footer>
+    {% include "script.html" %}
+</body>
+</html>
