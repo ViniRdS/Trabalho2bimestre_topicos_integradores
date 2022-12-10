@@ -5,6 +5,7 @@
         }
     },
     "require": {
+        "robmorgan/phinx": "^0.13.1",
         "slim/slim": "^4.11",
         "slim/psr7": "^1.6",
         "slim/twig-view": "^3.3"

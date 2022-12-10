@@ -19,7 +19,7 @@ class Connection
                 return static::$pdo;
             }
             //Caso a conexão com banco de dados não exista criamos, uma nova conexão.
-            static::$pdo = new PDO('pgsql:host=localhost;port=5432;dbname=aula2;'.
+            static::$pdo = new PDO('pgsql:host=localhost;port=5432;dbname=development_db;'.
                                    'user=postgres;password=root');
             //Caso seja bem-sucedida a conexão retornamos a variável $pdo;
             return static::$pdo;
