@@ -8,11 +8,11 @@ const carregando = document.querySelector("#carregando");
 const cadastro = document.querySelector("#btncadastro");
 
 //LABELS DO CADASTRAR
-const labelNome_Fantasia = document.querySelector("#labelNome_Fantasia")
-const labelSobrenome_Razao = document.querySelector("#labelSobrenome_Razao")
-const labelCpf_Cnpj = document.querySelector("#labelCpf_Cnpj")
-const labelRg_Ie = document.querySelector("#labelRg_Ie")
-const labelDtNascimento_Abertura = document.querySelector("#labelDtNascimento_Abertura")
+const labelNome = document.querySelector("#labelNome_Fantasia")
+const labelSobrenome = document.querySelector("#labelSobrenome_Razao")
+const labelCpf = document.querySelector("#labelCpf_Cnpj")
+const labelRg = document.querySelector("#labelRg_Ie")
+const labelDtNascimento = document.querySelector("#labelDtNascimento_Abertura")
 
 
 //DIV ONDE FICA OS INPUTS NO CADASTRAR
@@ -27,11 +27,11 @@ const fecharX = document.querySelector("#fecharX");
 
 
 //INPUT CADASTRO
-const cpf_cnpj = document.querySelector('#cpf_cnpj');
-const nome_fantasia = document.querySelector('#nome_fantasia');
-const dtnascimento_abertura = document.querySelector('#dtnascimento_abertura');
-const sobrenome_razao = document.querySelector('#sobrenome_razao');
-const rg_ie = document.querySelector('#rg_ie');
+const cpf = document.querySelector('#cpf');
+const nome = document.querySelector('#nome');
+const dtnascimento = document.querySelector('#dtnascimento');
+const sobrenome = document.querySelector('#sobrenome');
+const rg = document.querySelector('#rg');
 
 
 
@@ -83,20 +83,20 @@ async function deleta(id) {
 }
 function alterar(cliente) {
     const id = cliente.id;
-    const nome_fantasia = cliente.nome_fantasia;
-    const sobrenome_razao = cliente.sobrenome_razao;
-    const cpf_cnpj = cliente.cpf_cnpj;
-    const rg_ie = cliente.rg_ie;
-    const dtnascimento_abertura = cliente.dtnascimento_abertura;
+    const nome = cliente.nome;
+    const sobrenome = cliente.sobrenome;
+    const cpf = cliente.cpf;
+    const rg = cliente.rg;
+    const dtnascimento = cliente.dtnascimento;
     const tipo = cliente.tipo;
 
     $("#acao").val('update');
     $("#id").val(id);
-    $("#nome_fantasia").val(nome_fantasia);
-    $("#sobrenome_razao").val(sobrenome_razao);
-    $("#cpf_cnpj").val(cpf_cnpj);
-    $("#rg_ie").val(rg_ie);
-    $("#dtnascimento_abertura").val(dtnascimento_abertura);
+    $("#nome").val(nome);
+    $("#sobrenome").val(sobrenome);
+    $("#cpf").val(cpf);
+    $("#rg").val(rg);
+    $("#dtnascimento").val(dtnascimento);
     document.querySelector("#tipo").value = tipo;
 
     
@@ -124,11 +124,11 @@ async function update() {
     if (data == 'true') {
         $("#acao").val('update');
         $("#id").val('');
-        $("#nome_fantasia").val('');
-        $("#sobrenome_razao").val('');
-        $("#cpf_cnpj").val('');
-        $("#rg_ie").val('');
-        $("#dtnascimento_abertura").val('');
+        $("#nome").val('');
+        $("#sobrenome").val('');
+        $("#cpf").val('');
+        $("#rg").val('');
+        $("#dtnascimento").val('');
         $("#tipo").val('');
         lista_cliente();
         //ocultamos o modal
@@ -166,12 +166,11 @@ async function inserir() {
         body: formData,
         cache: 'default'
     }
-    const response = await fetch('cadastro.php', opt);
-    const dados = await response.text();
-    console.log(dados);
-    console.log(dados);
+     await fetch('/cadastrarcliente', opt)
+    
+   
     //VARIFICAMOS SE A RESPOSTA DO PHP OU SERVER É TRUE
-    if (dados == 'true') {
+    
         //CASO SEJA TRUE, EXIBIMOS A MENSAGEM DE SALVO COM SUCESSO,
         //E ALTERAMOS A COR DO COMPONENTE ALERT PARA SUCCESS
         alerta.className = 'alert alert-success';
@@ -179,12 +178,12 @@ async function inserir() {
         titulo.innerHTML = `<p>Cadastro realizado com sucesso!`;
         //OCULTA O ICONES CARREGANDO
         carregando.className = 'mb-0 d-none';
-        lista_cliente();
+        //lista_cliente();
         //aguardamos 0,5 seg para fechar o modal
         setTimeout(() => {
             //fecha o modal
             $("#cadastrocliente").modal('hide');
-            $("#frmcliente input").val('');
+            $("#frm input").val('');
             $("#alerta").removeClass('alert alert-success');
             $('#alerta').addClass('alert alert-warning');
             $("#titulo").removeClass('d-none');
@@ -195,11 +194,8 @@ async function inserir() {
             são obrigatórios para o
             cadastro!`;
         }, 1000);
-    } else {
-        titulo.className = `mb-0`;
-        titulo.innerHTML = `<p>${dados}</p>`;
-    }
 }
+
 //MAPEAMOS O EVENTO DE CARREGAMENTO DO DOCUMENTO
 document.addEventListener("DOMContentLoaded", function () {
     lista_cliente();
@@ -218,10 +214,21 @@ cadastro.addEventListener('click', function () {
 });
 
 salvar.addEventListener('click', function () {
+    document.querySelector('#tipo').value = 'salvar';
+   let tipo = document.querySelector('#tipo').value;
+   //window.location.href = "/cadastrarcliente";
+   /*  $.ajax({
+        type: "post",
+        url: "/cadastrarcliente",
+        data: {tipo: tipo}, success: function (tipo){
+            console.log(tipo);
+        }
+       })  */
+    
     //RECEBEMOS O RESULTADO DA VALIDAÇÃO DO FORMULARIO
     //const valida = $('#frm').valid();
     // let acao = document.getElementById("edtacao");
-    if (valida == true) {
+    /* if (valida == true) {
         if (document.getElementById('acao').value == 'update') {
             titulo.className = 'd-none';
             carregando.className = 'mb-0';
@@ -242,7 +249,7 @@ salvar.addEventListener('click', function () {
                 
                 
             }, 500);
-        } else if (document.getElementById('acao').value == 'insert') {
+        } else if (document.getElementById('acao').value == 'insert') { */
             titulo.className = 'd-none';
             carregando.className = 'mb-0';
             setTimeout(() => {
@@ -251,11 +258,11 @@ salvar.addEventListener('click', function () {
                 
                 
 
-                cpf_cnpj.classList.remove('is-valid')
-                nome_fantasia.classList.remove('is-valid')
-                dtnascimento_abertura.classList.remove('is-valid')
-                rg_ie.classList.remove('is-valid')
-                sobrenome_razao.classList.remove('is-valid')
+                cpf.classList.remove('is-valid')
+                nome.classList.remove('is-valid')
+                dtnascimento.classList.remove('is-valid')
+                rg.classList.remove('is-valid')
+                sobrenome.classList.remove('is-valid')
 
                 carregando.classList.add('d-none');
                 titulo.classList.remove('d-none')
@@ -264,9 +271,9 @@ salvar.addEventListener('click', function () {
                 
                 
             }, 500);
-        }
+        //}
        
-    }
+   // }
 });
 
 
