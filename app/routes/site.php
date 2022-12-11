@@ -13,4 +13,4 @@ $app->get('/venda', ControllerVenda::class . ':venda');
 $app->post('/cadastrarcliente', ControllerCliente::class . ':criarCliente');
 $app->get('/listarcliente', ControllerCliente::class . ':readCliente');
 $app->put('/atualizarcliente/{id}', ControllerCliente::class . ':updateCliente');
-$app->delete('/deletarcliente/{id}', ControllerCliente::class . ':deleteCliente');
+$app->any('/deletarcliente/{id}', ControllerCliente::class . ':deleteCliente');

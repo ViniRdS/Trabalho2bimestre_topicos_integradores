@@ -6,12 +6,11 @@ use PDOException;
 
 trait Delete
 {
-    public function delete($field, $value)
+    public function delete($field)
     {
         try {
-            $sql = "delete from {$this->table} where {$field} = :{$field};";
+            $sql = "delete from {$this->table} where id ={$field}";
             $prepared = $this->connection->prepare($sql);
-            $prepared->bindValue($field, $value);
             return $prepared->execute();
         } catch (PDOException $e) {
             var_dump($e->getMessage());

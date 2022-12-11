@@ -44,7 +44,6 @@ class ControllerCliente extends Base
         
     }
     public function criarCliente($request, $response){
-        
         $salvarCliente = [
             'nome' => filter_input(INPUT_POST, 'nome', FILTER_UNSAFE_RAW),
             'cpf' => filter_input(INPUT_POST, 'cpf', FILTER_UNSAFE_RAW),
@@ -78,7 +77,10 @@ class ControllerCliente extends Base
         return $response;
     }
     public function deleteCliente($request, $response, $args){
-       // $clientes=$this->cliente->delete();
+        $id = intval($args['id']);
+       $clientes=$this->cliente->delete($id);
+       
+       return $response;
                  
     }
 }

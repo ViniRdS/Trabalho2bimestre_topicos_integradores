@@ -66,24 +66,18 @@ const rg = document.querySelector('#rg');
 
  
 async function deleta(id) {
+
     document.getElementById('idcliente').value = id;
-    const form = document.querySelector('#clientes');
-    dados = new FormData(form);
-    const opt = {
-        method: 'POST',
-        body: dados,
-        mode: 'cors',
-        cache: 'default'
-    };
-    const response = await fetch('delete.php', opt);
-    const data = await response.text();
-    if (data == 'true') {
-        $('#tr' + id).remove();
-    }
+    idcliente =document.getElementById('idcliente').value;
+
+    const response = await fetch(`/deletarcliente/${idcliente}`);
+
+
+    atualizar()
 }
 
 async function alterar(id) {
-    
+    document.getElementById('acao').value = 'update';
     const clientes = await lista_cliente()
     const busca = clientes.find(function(elemento){
         return elemento.id==id
@@ -141,7 +135,7 @@ console.log(dados);
         cache: 'default'
 
     };
-    const response = await fetch(`/atualizarcliente/${id}`, opt);
+    const response = await fetch(`/atualizarcliente/${id}`,opt);
     const data = await response.text(); 
     if (data == 'true') {
         $("#acao").val('update');
