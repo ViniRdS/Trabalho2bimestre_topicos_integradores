@@ -9,7 +9,7 @@
     <title>{{ titulo }}</title>
 </head>
 
-<body>
+<body id="body">
     {% include "nav.html" %}
 
     <!-- Modal -->
@@ -20,9 +20,9 @@
                 <form method="post" name="frm" id="frm">
                     <input type="text" id="id" name="id">
                     <input type="text" id="acao" name="acao">
-                    <input type="text" id="tipo" name="tipo" class="">
+                    <input type="text" id="tipo" name="tipo" class="esconder" >
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">{{ tituloModal }}</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Dados do cliente</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                             id="fecharX"></button>
                     </div>
@@ -88,7 +88,7 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="fechar">
                             <i class="fa-solid fa-xmark"> </i> Fechar
                         </button>
-                        <button id="btnsalvar" type="button" class="btn btn-success" onclick="{{ salvar }}">
+                        <button id="btnsalvar" type="button" class="btn btn-success">
                             <i class="fa-solid fa-floppy-disk"></i> Salvar
                         </button>
                     </div>
@@ -107,7 +107,7 @@
                                 data-bs-target="#cadastrocliente">
                                 <i class="fa-solid fa-plus"> </i> Cadastrar
                             </button>
-                            <button id="btnatualiza" type="button" class="btn btn-primary">
+                            <button id="btnatualiza" type="button" class="btn btn-primary" >
                                 <i class="fa-solid fa-rotate-right"> </i> Atualizar
                             </button>
                         </div>
@@ -147,14 +147,11 @@
                                         <td>{{clientes.dtnascimento}}</td>
                                         <td>
                                             <div class='btn-group' role='group'>
-
-                                                <button type='button' onclick='alterar()' type='button'
-                                                    class='btn btn-warning mr-3'>
-                                                    <i class='fa-solid fa-pen-to-square'> </i> Editar
-                                                </button>
-                                                <button onclick='deleta()' type='button' class='btn btn-danger '>
-                                                    <i class='fa-solid fa-trash'> </i> Excluir
-                                                </button>
+                                            <button type='button' onclick='alterar(id)' type='button' class='btn btn-warning'>
+                                            <i class='fa-solid fa-pen-to-square'> </i> Editar
+                                            </button>
+                                            <button onclick='deleta(id);' type='button' class='btn btn-danger'>
+                                            <i class='fa-solid fa-trash'> </i> Excluir
                                             </div>
                                         </td>
                                     </tr>

@@ -24,7 +24,6 @@ class ControllerCliente extends Base
             $this->setView("listacliente"),
             [
                 "titulo" => "Lista de clientes",
-                "tituloModal" => "Dados do cliente",
                 "cpf" => "CPF",
                 "nome" => "Nome",
                 "sobrenome" => "Sobrenome",
@@ -37,7 +36,8 @@ class ControllerCliente extends Base
                 "col6" => "Data de Nascimento",
                 "clientes" => $clientes
                 
-            ]
+            ],
+          
         );
          
             
@@ -53,6 +53,32 @@ class ControllerCliente extends Base
             'dtnascimento' => filter_input(INPUT_POST, 'dtnascimento', FILTER_UNSAFE_RAW),
         ];
         $res =$this->cliente->create($salvarCliente);
-        echo('true');
+        return $response;
+    }
+    public function readCliente($request, $response){
+        $clientes=$this->cliente->find();
+	    echo json_encode($clientes);
+        return $response;     
+    }
+    public function updateCliente($request, $response , $args){
+        $updateCliente = [
+            "fields" => [
+                'nome' => filter_input(INPUT_POST, 'nome', FILTER_UNSAFE_RAW),
+                'cpf' => filter_input(INPUT_POST, 'cpf', FILTER_UNSAFE_RAW),
+                'sobrenome' => filter_input(INPUT_POST, 'sobrenome', FILTER_UNSAFE_RAW),
+                'rg' => filter_input(INPUT_POST, 'rg', FILTER_UNSAFE_RAW),
+                'dtnascimento' => filter_input(INPUT_POST, 'dtnascimento', FILTER_UNSAFE_RAW),
+            ],
+            "where" => [
+                "id" => $args
+            ]
+        ];
+        var_dump($updateCliente);
+        $res =$this->cliente->update($updateCliente);
+        return $response;
+    }
+    public function deleteCliente($request, $response, $args){
+       // $clientes=$this->cliente->delete();
+                 
     }
 }

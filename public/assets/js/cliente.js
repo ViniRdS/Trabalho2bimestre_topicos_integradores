@@ -81,14 +81,21 @@ async function deleta(id) {
         $('#tr' + id).remove();
     }
 }
-function alterar(cliente) {
-    const id = cliente.id;
-    const nome = cliente.nome;
-    const sobrenome = cliente.sobrenome;
-    const cpf = cliente.cpf;
-    const rg = cliente.rg;
-    const dtnascimento = cliente.dtnascimento;
-    const tipo = cliente.tipo;
+
+async function alterar(id) {
+    
+    const clientes = await lista_cliente()
+    const busca = clientes.find(function(elemento){
+        return elemento.id==id
+    })
+    
+    
+    const nome = busca.nome;
+    const sobrenome = busca.sobrenome;
+    const cpf = busca.cpf;
+    const rg = busca.rg;
+    const dtnascimento = busca.dtnascimento;
+    tituloModal.innerHTML = 'Editar cliente';
 
     $("#acao").val('update');
     $("#id").val(id);
@@ -97,7 +104,6 @@ function alterar(cliente) {
     $("#cpf").val(cpf);
     $("#rg").val(rg);
     $("#dtnascimento").val(dtnascimento);
-    document.querySelector("#tipo").value = tipo;
 
     
 
@@ -109,18 +115,34 @@ async function update() {
     /*alerta.className = 'alert alert-success';
     titulo.className = 'mb-0';
     titulo.innerHTML = `<p>Alteração realizada com sucesso!`;**/
-    const form = document.querySelector("#frm")
-    const dados = new FormData(form);
-
+    const form = document.querySelector('#clientes');
+    dados = new FormData(form);
+    const id = document.querySelector("#id").value
+    /* dados= [
+        id,
+        nome.value,
+         sobrenome.value,
+        cpf.value,
+         rg.value,
+         dtnascimento.value,
+    ] */
+    /* $.ajax({
+        type: "put",
+        url: `/atualizarcliente/${id}`,
+        data: {dados: dados}, success: function (tipo){
+            console.log(tipo);
+        }
+       })  */
+console.log(dados);
     const opt = {
-        method: "POST",
+        method: "PUT",
         mode: 'cors',
-        body: dados,
+        data: dados,
         cache: 'default'
 
     };
-    const response = await fetch('cadastro.php', opt);
-    const data = await response.text();
+    const response = await fetch(`/atualizarcliente/${id}`, opt);
+    const data = await response.text(); 
     if (data == 'true') {
         $("#acao").val('update');
         $("#id").val('');
@@ -130,7 +152,7 @@ async function update() {
         $("#rg").val('');
         $("#dtnascimento").val('');
         $("#tipo").val('');
-        lista_cliente();
+        atualizar();
         //ocultamos o modal
         $("#cadastrocliente").modal('hide');
 
@@ -140,20 +162,61 @@ async function update() {
 async function lista_cliente() {
     //monstamos a configuração da requição
     //ao servidor http
-    const opt = {
-        method: 'POST',
+    /* $.ajax({
+        type: "get",
+        url: "/listarcliente",
+        data: {tipo: tipo}, success: function (tipo){
+            console.log(tipo);
+        }
+       })  */
+       
+      const opt = {
+        method: 'GET',
         mode: 'cors',
         cache: 'default'
     }
+    
     //A VARIAVEL response RECEBERÁ UMA PROMISSE
     //DE UMA TENTATIVA DE REQUISIÇÃO.
-    //const response = await fetch('', opt);
+    const response = await fetch('/listarcliente') 
+    
+    
     //CONVERTEMOS O A RESPOSTA  PARA TEXTO
     //QUE TERÁ UMA ESTRUTURA HTML
-   // const html = await response.text();
+    const html = await response.json();
+    //console.log(html);
     //PRINTAMOS NO CONSOLE O RESULTADO
-
+   /* btn = JSON.stringify((document.getElementById('btnatualiza').value))
+   console.log(btn); */
     //document.getElementById('dados').innerHTML = html;
+    return html
+}
+async function atualizar(){
+   const clientes = await lista_cliente();
+   dados = "";
+   clientes.forEach(cliente => {
+     dados +=`<tr id='tr ${cliente.id}'>
+    <td> ${cliente.id}</td>
+    <td> ${cliente.nome} </td>
+    <td> ${cliente.sobrenome} </td>
+    <td> ${cliente.cpf}</td>
+    <td> ${cliente.rg} </td>
+    <td> ${cliente.dtnascimento}</td>
+    <td>
+    <div class='btn-group' role='group'>
+    <button type='button' onclick='alterar(${cliente.id})' type='button' class='btn btn-warning'>
+    <i class='fa-solid fa-pen-to-square'> </i> Editar
+    </button>
+    <button onclick='deleta(${cliente.id});' type='button' class='btn btn-danger'>
+    <i class='fa-solid fa-trash'> </i> Excluir
+    </div>
+    </td>
+    </tr>`
+   });
+   //console.log(dados);
+   
+   //console.log(dado);
+   document.getElementById('dados').innerHTML = dados;
 }
 
 async function inserir() {
@@ -178,7 +241,7 @@ async function inserir() {
         titulo.innerHTML = `<p>Cadastro realizado com sucesso!`;
         //OCULTA O ICONES CARREGANDO
         carregando.className = 'mb-0 d-none';
-        //lista_cliente();
+        atualizar();
         //aguardamos 0,5 seg para fechar o modal
         setTimeout(() => {
             //fecha o modal
@@ -198,17 +261,18 @@ async function inserir() {
 
 //MAPEAMOS O EVENTO DE CARREGAMENTO DO DOCUMENTO
 document.addEventListener("DOMContentLoaded", function () {
-    lista_cliente();
+    atualizar()
 });
 
 atualiza.addEventListener('click', async function () {
-    lista_cliente();
+    atualizar()
+    
 });
 
 cadastro.addEventListener('click', function () {
-   // $("#frm input").val('');
+   $("#frm input").val('');
     document.getElementById('acao').value = 'insert';
-    
+    tituloModal.innerHTML = 'Dados do cliente';
        
 
 });
@@ -226,20 +290,20 @@ salvar.addEventListener('click', function () {
        })  */
     
     //RECEBEMOS O RESULTADO DA VALIDAÇÃO DO FORMULARIO
-    //const valida = $('#frm').valid();
+    const valida = $('#frm').valid();
     // let acao = document.getElementById("edtacao");
-    /* if (valida == true) {
+     if (valida == true) {
         if (document.getElementById('acao').value == 'update') {
             titulo.className = 'd-none';
             carregando.className = 'mb-0';
             setTimeout(() => {
                 update();
 
-                cpf_cnpj.classList.remove('is-valid')
-                nome_fantasia.classList.remove('is-valid')
-                dtnascimento_abertura.classList.remove('is-valid')
-                rg_ie.classList.remove('is-valid')
-                sobrenome_razao.classList.remove('is-valid')
+                cpf.classList.remove('is-valid')
+                nome.classList.remove('is-valid')
+                dtnascimento.classList.remove('is-valid')
+                rg.classList.remove('is-valid')
+                sobrenome.classList.remove('is-valid')
 
                 carregando.classList.add('d-none');
                 titulo.classList.remove('d-none')
@@ -249,7 +313,7 @@ salvar.addEventListener('click', function () {
                 
                 
             }, 500);
-        } else if (document.getElementById('acao').value == 'insert') { */
+        } else if (document.getElementById('acao').value == 'insert') { 
             titulo.className = 'd-none';
             carregando.className = 'mb-0';
             setTimeout(() => {
@@ -271,9 +335,9 @@ salvar.addEventListener('click', function () {
                 
                 
             }, 500);
-        //}
+        }
        
-   // }
+   }
 });
 
 
@@ -282,22 +346,22 @@ salvar.addEventListener('click', function () {
 fechar.addEventListener('click', () => {
 
 
-    cpf_cnpj.classList.remove('is-valid')
-    nome_fantasia.classList.remove('is-valid')
-    dtnascimento_abertura.classList.remove('is-valid')
-    rg_ie.classList.remove('is-valid')
-    sobrenome_razao.classList.remove('is-valid')
+    cpf.classList.remove('is-valid')
+    nome.classList.remove('is-valid')
+    dtnascimento.classList.remove('is-valid')
+    rg.classList.remove('is-valid')
+    sobrenome.classList.remove('is-valid')
 
-    nome_fantasia.classList.remove('is-invalid')
-    sobrenome_razao.classList.remove('is-invalid')
-    rg_ie.classList.remove('is-invalid')
-    dtnascimento_abertura.classList.remove('is-invalid')
+    nome.classList.remove('is-invalid')
+    sobrenome.classList.remove('is-invalid')
+    rg.classList.remove('is-invalid')
+    dtnascimento.classList.remove('is-invalid')
     if(document.getElementById('acao').value == 'insert'){
-        cpf_cnpj.value = ''
-        nome_fantasia.value = ''
-        sobrenome_razao.value = ''
-        rg_ie.value = ''
-        dtnascimento_abertura.value = ''
+        cpf.value = ''
+        nome.value = ''
+        sobrenome.value = ''
+        rg.value = ''
+        dtnascimento.value = ''
         }
 
     carregando.classList.add('d-none');
@@ -311,22 +375,22 @@ fecharX.addEventListener('click', () => {
     
 
 
-    cpf_cnpj.classList.remove('is-valid')
-    nome_fantasia.classList.remove('is-valid')
-    dtnascimento_abertura.classList.remove('is-valid')
-    rg_ie.classList.remove('is-valid')
-    sobrenome_razao.classList.remove('is-valid')
+    cpf.classList.remove('is-valid')
+    nome.classList.remove('is-valid')
+    dtnascimento.classList.remove('is-valid')
+    rg.classList.remove('is-valid')
+    sobrenome.classList.remove('is-valid')
 
-    nome_fantasia.classList.remove('is-invalid')
-    sobrenome_razao.classList.remove('is-invalid')
-    rg_ie.classList.remove('is-invalid')
-    dtnascimento_abertura.classList.remove('is-invalid')
+    nome.classList.remove('is-invalid')
+    sobrenome.classList.remove('is-invalid')
+    rg.classList.remove('is-invalid')
+    dtnascimento.classList.remove('is-invalid')
     if(document.getElementById('acao').value == 'insert'){
-        cpf_cnpj.value = ''
-        nome_fantasia.value = ''
-        sobrenome_razao.value = ''
-        rg_ie.value = ''
-        dtnascimento_abertura.value = ''
+        cpf.value = ''
+        nome.value = ''
+        sobrenome.value = ''
+        rg.value = ''
+        dtnascimento.value = ''
         }
 
     carregando.classList.add('d-none');
@@ -334,7 +398,7 @@ fecharX.addEventListener('click', () => {
 
 })
 
-$("#cpf_cnpj").inputmask({
+$("#cpf").inputmask({
     mask: '999.999.999-99'
 });
 
