@@ -60,18 +60,20 @@ class ControllerCliente extends Base
         return $response;     
     }
     public function updateCliente($request, $response , $args){
+        
         $updateCliente = [
             "fields" => [
-                'nome' => filter_input(INPUT_POST, 'nome', FILTER_UNSAFE_RAW),
-                'cpf' => filter_input(INPUT_POST, 'cpf', FILTER_UNSAFE_RAW),
-                'sobrenome' => filter_input(INPUT_POST, 'sobrenome', FILTER_UNSAFE_RAW),
-                'rg' => filter_input(INPUT_POST, 'rg', FILTER_UNSAFE_RAW),
-                'dtnascimento' => filter_input(INPUT_POST, 'dtnascimento', FILTER_UNSAFE_RAW),
+                'nome' => filter_input(INPUT_POST, 'nomeEditar', FILTER_UNSAFE_RAW),
+                'cpf' => filter_input(INPUT_POST, 'cpfEditar', FILTER_UNSAFE_RAW),
+                'sobrenome' => filter_input(INPUT_POST, 'sobrenomeEditar', FILTER_UNSAFE_RAW),
+                'rg' => filter_input(INPUT_POST, 'rgEditar', FILTER_UNSAFE_RAW),
+                'dtnascimento' => filter_input(INPUT_POST, 'dtnascimentoEditar', FILTER_UNSAFE_RAW),
             ],
             "where" => [
-                "id" => $args
+                "id" => filter_input(INPUT_POST, 'idEditar', FILTER_UNSAFE_RAW)
             ]
         ];
+        
         var_dump($updateCliente);
         $res =$this->cliente->update($updateCliente);
         return $response;

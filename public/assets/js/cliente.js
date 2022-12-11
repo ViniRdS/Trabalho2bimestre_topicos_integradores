@@ -1,6 +1,7 @@
 // TODAS AS QUERYS DE SELEÇÃO DE CAMPO HTML
 const atualiza = document.querySelector("#btnatualiza");
 const salvar = document.querySelector("#btnsalvar");
+const salvarEditar = document.querySelector("#btnsalvarEditar");
 
 const alerta = document.querySelector("#alerta");
 const titulo = document.querySelector("#titulo");
@@ -33,7 +34,11 @@ const dtnascimento = document.querySelector('#dtnascimento');
 const sobrenome = document.querySelector('#sobrenome');
 const rg = document.querySelector('#rg');
 
-
+const cpfEditar = document.querySelector('#cpfEditar');
+const nomeEditar = document.querySelector('#nomeEditar');
+const dtnascimentoEditar = document.querySelector('#dtnascimentoEditar');
+const sobrenomeEditar = document.querySelector('#sobrenomeEditar');
+const rgEditar = document.querySelector('#rgEditar');
 
 //CONFIGURAÇÕES DOS PARAMENTRO DE VALIDAÇÃO DO FORMULÁRIO
   $('#frm').validate({
@@ -84,85 +89,51 @@ async function alterar(id) {
     })
     
     
-    const nome = busca.nome;
-    const sobrenome = busca.sobrenome;
-    const cpf = busca.cpf;
-    const rg = busca.rg;
-    const dtnascimento = busca.dtnascimento;
-    tituloModal.innerHTML = 'Editar cliente';
+    const nomeEditar = busca.nome;
+    const sobrenomeEditar = busca.sobrenome;
+    const cpfEditar = busca.cpf;
+    const rgEditar = busca.rg;
+    const dtnascimentoEditar = busca.dtnascimento;
+   
 
     $("#acao").val('update');
-    $("#id").val(id);
-    $("#nome").val(nome);
-    $("#sobrenome").val(sobrenome);
-    $("#cpf").val(cpf);
-    $("#rg").val(rg);
-    $("#dtnascimento").val(dtnascimento);
+    $("#idEditar").val(id);
+    $("#nomeEditar").val(nomeEditar);
+    $("#sobrenomeEditar").val(sobrenomeEditar);
+    $("#cpfEditar").val(cpfEditar);
+    $("#rgEditar").val(rgEditar);
+    $("#dtnascimentoEditar").val(dtnascimentoEditar);
 
     
 
     //exibimos o modal
-    $("#cadastrocliente").modal('show');
+    $("#editarcliente").modal('show');
 }
 
 async function update() {
-    /*alerta.className = 'alert alert-success';
-    titulo.className = 'mb-0';
-    titulo.innerHTML = `<p>Alteração realizada com sucesso!`;**/
-    const form = document.querySelector('#clientes');
+   
+    const form = document.querySelector('#frmEditar');
     dados = new FormData(form);
-    const id = document.querySelector("#id").value
-    /* dados= [
-        id,
-        nome.value,
-         sobrenome.value,
-        cpf.value,
-         rg.value,
-         dtnascimento.value,
-    ] */
-    /* $.ajax({
-        type: "put",
-        url: `/atualizarcliente/${id}`,
-        data: {dados: dados}, success: function (tipo){
-            console.log(tipo);
-        }
-       })  */
-console.log(dados);
+    const id = document.querySelector("#idEditar").value
+   
     const opt = {
-        method: "PUT",
+        method: "POST",
         mode: 'cors',
-        data: dados,
+        body: dados,
         cache: 'default'
 
     };
     const response = await fetch(`/atualizarcliente/${id}`,opt);
-    const data = await response.text(); 
-    if (data == 'true') {
-        $("#acao").val('update');
-        $("#id").val('');
-        $("#nome").val('');
-        $("#sobrenome").val('');
-        $("#cpf").val('');
-        $("#rg").val('');
-        $("#dtnascimento").val('');
-        $("#tipo").val('');
+   
         atualizar();
         //ocultamos o modal
-        $("#cadastrocliente").modal('hide');
+        $("#editarcliente").modal('hide');
 
-    }
+    
 }
 
 async function lista_cliente() {
-    //monstamos a configuração da requição
-    //ao servidor http
-    /* $.ajax({
-        type: "get",
-        url: "/listarcliente",
-        data: {tipo: tipo}, success: function (tipo){
-            console.log(tipo);
-        }
-       })  */
+   
        
       const opt = {
         method: 'GET',
@@ -180,9 +151,7 @@ async function lista_cliente() {
     const html = await response.json();
     //console.log(html);
     //PRINTAMOS NO CONSOLE O RESULTADO
-   /* btn = JSON.stringify((document.getElementById('btnatualiza').value))
-   console.log(btn); */
-    //document.getElementById('dados').innerHTML = html;
+   
     return html
 }
 async function atualizar(){
@@ -224,7 +193,7 @@ async function inserir() {
         cache: 'default'
     }
      await fetch('/cadastrarcliente', opt)
-    
+    console.log(formData);
    
     //VARIFICAMOS SE A RESPOSTA DO PHP OU SERVER É TRUE
     
@@ -270,18 +239,16 @@ cadastro.addEventListener('click', function () {
        
 
 });
+salvarEditar.addEventListener('click', (e)=>{
+    e.preventDefault()  
+    update();      
+
+})
 
 salvar.addEventListener('click', function () {
     document.querySelector('#tipo').value = 'salvar';
    let tipo = document.querySelector('#tipo').value;
-   //window.location.href = "/cadastrarcliente";
-   /*  $.ajax({
-        type: "post",
-        url: "/cadastrarcliente",
-        data: {tipo: tipo}, success: function (tipo){
-            console.log(tipo);
-        }
-       })  */
+  
     
     //RECEBEMOS O RESULTADO DA VALIDAÇÃO DO FORMULARIO
     const valida = $('#frm').valid();

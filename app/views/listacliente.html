@@ -96,6 +96,89 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="editarcliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" name="frmEditar" id="frmEditar">
+                <input type="text" id="idEditar" name="idEditar" class="esconder">
+                <input type="text" id="acao" name="acao">
+                <input type="text" id="tipo" name="tipo" class="esconder" >
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Editar cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        id="fecharXEditar"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- AQUI TEMOS UMA LINHA -->
+                    <div class="row">
+                        <!-- AQUI TEMOS UMA COLUNA OCUPANDO 100% DO TAMANHO DA LINHA -->
+                        <div class="col-12">
+                            <!-- AQUI TEMOS O COMPONENTE ALERT -->
+                            <div id="alerta" class="alert alert-warning" role="alert">
+                                <!-- AQUI TEMOS O TITULO DO ALERT DO BOOTSTRAP -->
+                                <div id="titulo" class="mb-0">
+                                    <h6 class="alert-heading">Atenção!</h6>
+                                    Todos os campos com <span class="text-danger"> * </span> são obrigatórios para o
+                                    cadastro!
+                                </div>
+                                <!-- AQUI TEMOS SPINNER PARA MENSAGEM DE SALVANDO -->
+                                <div id="carregando" class="mb-0 d-none">
+                                    <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <span>Salvando...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="inputs" class="">
+                                <div class="form-group">
+                                    <label for="cpfEditar" class="form-label"Editar id="labelCpf">{{ cpf }}</label>
+                                    <input type="text" class="form-control" id="cpfEditar" name="cpfEditar" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nomeEditar" class="form-label" id="labelNomeEditar">{{ nome }}</label>
+                                    <input type="text" class="form-control" id="nomeEditar" name="nomeEditar" required
+                                        minlength="3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sobrenomeEditar" class="form-label" id="labelSobrenomeEditar">{{ sobrenome
+                                        }}</label>
+                                    <input type="text" class="form-control" id="sobrenomeEditar" name="sobrenomeEditar" required
+                                        minlength="3">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rgEditar" class="form-label" id="labelRgEditar">{{ rg }}</label>
+                                    <input type="text" class="form-control" id="rgEditar" name="rgEditar" minlength="6">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dtnascimentoEditar" class="form-label" id="labelDtNascimentoEditar">{{
+                                        dtnascimento }}</label>
+                                    <input type="date" class="form-control" id="dtnascimentoEditar" name="dtnascimentoEditar"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="fecharEditar">
+                        <i class="fa-solid fa-xmark"> </i> Fechar
+                    </button>
+                    <button id="btnsalvarEditar" type="submit" class="btn btn-success">
+                        <i class="fa-solid fa-floppy-disk"></i> Salvar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
     <div class="container" id="container">
         <form id="clientes" name="clientes">
             <input type="text" name="idcliente" id="idcliente">
