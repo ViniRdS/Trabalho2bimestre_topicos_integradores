@@ -11,7 +11,7 @@
 
 <body>
     {% include "nav.html" %}
-    
+
     <!-- Modal -->
     <div class="modal fade" id="cadastroproduto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -53,31 +53,35 @@
                             <div class="col-12">
                                 <div id="inputs" class="">
                                     <div class="form-group">
-                                        <label for="nome_produto" class="form-label" id="labelcod_produto">{{  nome_prod }}</label>
-                                        <input type="text" class="form-control" id="nome_produto" name="nome_produto" required>
+                                        <label for="nome_produto" class="form-label" id="labelcod_produto">{{ nome_prod
+                                            }}</label>
+                                        <input type="text" class="form-control" id="nome_produto" name="nome_produto"
+                                            required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="marca_prod" class="form-label" id="labelMarca_prod">{{ marca }}</label>
+                                        <label for="marca_prod" class="form-label" id="labelMarca_prod">{{ marca
+                                            }}</label>
                                         <input type="text" class="form-control" id="marca_prod" name="marca_prod"
-                                            required >
+                                            required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="descricao_prod" class="form-label"
-                                            id="labelDescricao_Prod">{{ descricao_prod }}</label>
+                                        <label for="descricao_prod" class="form-label" id="labelDescricao_Prod">{{
+                                            descricao_prod }}</label>
                                         <textarea type="text" class="form-control" id="descricao_prod"
-                                            name="descricao_prod" required ></textarea>
+                                            name="descricao_prod" required></textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="preco_prod" class="form-label" id="labelPreco_Prod">{{ preco }}</label>
-                                        <input type="number" class="form-control" id="preco_prod" name="preco_prod"> 
+                                        <label for="preco_prod" class="form-label" id="labelPreco_Prod">{{ preco
+                                            }}</label>
+                                        <input type="number" class="form-control" id="preco_prod" name="preco_prod">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="dtfabricacao" class="form-label"
-                                            id="labelDtfabricacao">{{ datafabricacao }}</label>
-                                        <input type="date" class="form-control" id="dtfabricacao"
-                                            name="dtfabricacao" required>
+                                        <label for="dtfabricacao" class="form-label" id="labelDtfabricacao">{{
+                                            datafabricacao }}</label>
+                                        <input type="date" class="form-control" id="dtfabricacao" name="dtfabricacao"
+                                            required>
                                     </div>
                                 </div>
                             </div>
@@ -136,24 +140,29 @@
                             <div class="col-12">
                                 <div id="inputs" class="">
                                     <div class="form-group">
-                                        <label for="nome_produtoEditar" class="form-label" id="labelcod_produtoEditar">{{  nome_prod }}</label>
-                                        <input type="text" class="form-control" id="nome_produtoEditar" name="nome_produtoEditar" required>
+                                        <label for="nome_produtoEditar" class="form-label"
+                                            id="labelcod_produtoEditar">{{ nome_prod }}</label>
+                                        <input type="text" class="form-control" id="nome_produtoEditar"
+                                            name="nome_produtoEditar" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="marca_prodEditar" class="form-label" id="labelNome_prodEditar">{{ marca }}</label>
-                                        <input type="text" class="form-control" id="marca_prodEditar" name="marca_prodEditar"
-                                            required >
+                                        <label for="marca_prodEditar" class="form-label" id="labelNome_prodEditar">{{
+                                            marca }}</label>
+                                        <input type="text" class="form-control" id="marca_prodEditar"
+                                            name="marca_prodEditar" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="descricao_prodEditar" class="form-label"
                                             id="labelDescricao_ProdEditar">{{ descricao_prod }}</label>
                                         <textarea type="text" class="form-control" id="descricao_prodEditar"
-                                            name="descricao_prodEditar" required ></textarea>
+                                            name="descricao_prodEditar" required></textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="preco_prodEditar" class="form-label" id="labelPreco_ProdEditar">{{ preco }}</label>
-                                        <input type="number" class="form-control" id="preco_prodEditar" name="preco_prodEditar"> 
+                                        <label for="preco_prodEditar" class="form-label" id="labelPreco_ProdEditar">{{
+                                            preco }}</label>
+                                        <input type="number" class="form-control" id="preco_prodEditar"
+                                            name="preco_prodEditar">
                                     </div>
 
                                     <div class="form-group">
@@ -207,6 +216,23 @@
 
                                 </div>
                             </div>
+                            <div class="modal fade" id="carrinho" data-bs-backdrop="static" data-bs-keyboard="false"
+                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Você gostaria de?</h1>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Continuar comprando</button>
+                                            <a class="nav-link btn btn-primary carrinho-link" href="/carrinho">
+                                            Ir para o carrinho
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -230,14 +256,15 @@
                                         <td>{{produtos.dtfabricacao}}</td>
                                         <td>
                                             <div class='btn-group' role='group'>
-                                            <button type='button' onclick='alterar(id)' type='button' class='btn btn-warning'>
-                                            <i class='fa-solid fa-pen-to-square'> </i> Editar
-                                            </button>
-                                            <button onclick='deleta(id);' type='button' class='btn btn-danger'>
-                                            <i class='fa-solid fa-trash'> </i> Excluir
-                                            </button>
-                                            <button onclick='deleta(id);' type='button' class='btn btn-primary'>
-                                            <i class='fa-solid fa-basket-shopping'> </i> Comprar
+                                                <button type='button' onclick='alterar(id)' type='button'
+                                                    class='btn btn-warning'>
+                                                    <i class='fa-solid fa-pen-to-square'> </i> Editar
+                                                </button>
+                                                <button onclick='deleta(id);' type='button' class='btn btn-danger'>
+                                                    <i class='fa-solid fa-trash'> </i> Excluir
+                                                </button>
+                                                <button onclick='comprar(id);' type='button' class='btn btn-primary'>
+                                                    <i class='fa-solid fa-basket-shopping'> </i> Comprar
                                             </div>
                                         </td>
                                     </tr>

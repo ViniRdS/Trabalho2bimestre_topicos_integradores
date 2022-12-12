@@ -162,7 +162,7 @@ async function atualizar(){
    const produtos = await lista_produto();
    dados = "";
    produtos.forEach(produto => {
-     dados +=`<tr id='tr ${produto.id}'>
+     dados +=`<tr id='tr${produto.id}'>
     <td> ${produto.id}</td>
     <td> ${produto.nome} </td>
     <td> ${produto.marca} </td>
@@ -177,7 +177,7 @@ async function atualizar(){
     <button onclick='deleta(${produto.id});' type='button' class='btn btn-danger'>
     <i class='fa-solid fa-trash'> </i> Excluir
     </button>
-    <button onclick='deleta(${produto.id});' type='button' class='btn btn-primary'>
+    <button onclick='comprar(${produto.id});' type='button' class='btn btn-primary'>
     <i class='fa-solid fa-basket-shopping'> </i> Comprar
     </div>
     </td>
@@ -368,4 +368,22 @@ fecharX.addEventListener('click', () => {
 
 })
 
+async function comprar(id) {
+    document.getElementById('idproduto').value = id;
+    idproduto = document.getElementById('idproduto').value;
+    const produtos = await lista_produto()
+    const busca = produtos.find(function(elemento){
+        return elemento.id==id
+    })
 
+    $.ajax({
+        type: "post",
+        url: "/adicionarcarrinho",
+        data: {idproduto: idproduto}, success: function (idproduto){
+          
+        }
+       })
+
+    $("#carrinho").modal('show');
+
+}

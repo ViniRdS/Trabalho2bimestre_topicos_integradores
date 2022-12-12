@@ -74,7 +74,7 @@ class ControllerCliente extends Base
             ]
         ];
         
-        var_dump($updateCliente);
+        
         $res =$this->cliente->update($updateCliente);
         return $response;
     }

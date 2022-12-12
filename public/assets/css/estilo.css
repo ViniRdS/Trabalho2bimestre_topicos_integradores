@@ -77,3 +77,10 @@ body{
 #Tabelacabecalho{
     text-align: center;
 }
+.carrinho-link{
+    padding: 5px;
+    color: white;
+}
+.vendas{
+    margin: 20px;
+}

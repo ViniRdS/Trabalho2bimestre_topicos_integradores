@@ -4,6 +4,7 @@ use app\controllers\ControllerCliente;
 use app\controllers\ControllerProduto;
 use app\controllers\ControllerVenda;
 use app\controllers\ControllerHome;
+use app\controllers\ControllerCarrinho;
 
 
 $app->get('/', ControllerHome::class . ':home');
@@ -19,3 +20,8 @@ $app->post('/cadastrarproduto', ControllerProduto::class . ':criarproduto');
 $app->get('/listarproduto', ControllerProduto::class . ':readproduto');
 $app->any('/atualizarproduto/{id}', ControllerProduto::class . ':updateproduto');
 $app->any('/deletarproduto/{id}', ControllerProduto::class . ':deleteproduto');
+
+$app->get('/carrinho', ControllerCarrinho::class . ':carrinho');
+$app->post('/adicionarcarrinho', ControllerCarrinho::class . ':adicionarcarrinho');
+$app->any('/deletarprodutoCarrinho/{id}', ControllerCarrinho::class . ':deleteprodutoCarrinho');
+$app->any('/deletarCarrinho', ControllerCarrinho::class . ':deleteTudo');

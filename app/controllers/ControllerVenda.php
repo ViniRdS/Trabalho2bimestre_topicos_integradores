@@ -4,15 +4,18 @@ namespace app\controllers;
 
 use app\database\models\Cliente;
 use app\database\models\Produto;
+use app\database\models\Venda;
 
 class ControllerVenda extends Base
 {
     private $cliente;
     private $produto;
+    private $venda;
     public function __construct()
     {
         $this->cliente = new Cliente();
         $this->produto = new Produto();
+        $this->venda = new Venda();
     }
     
 

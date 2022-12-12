@@ -16,4 +16,15 @@ trait Delete
             var_dump($e->getMessage());
         }
     }
+
+    public function deleteAll()
+    {
+        try {
+            $sql = "delete from {$this->table}";
+            $prepared = $this->connection->prepare($sql);
+            return $prepared->execute();
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+        }
+    }
 }
