@@ -9,11 +9,12 @@ const carregando = document.querySelector("#carregando");
 const cadastro = document.querySelector("#btncadastro");
 
 //LABELS DO CADASTRAR
-const labelNome = document.querySelector("#labelNome_Fantasia")
-const labelSobrenome = document.querySelector("#labelSobrenome_Razao")
-const labelCpf = document.querySelector("#labelCpf_Cnpj")
-const labelRg = document.querySelector("#labelRg_Ie")
-const labelDtNascimento = document.querySelector("#labelDtNascimento_Abertura")
+const labelNomeProd = document.querySelector("#labelNome_prod")
+const labelDescricao_Prod = document.querySelector("#labelDescricao_Prod")
+const labelPreco_Prod = document.querySelector("#labelPreco_Prod")
+const labelDtfabricacao = document.querySelector("#labelDtfabricacao")
+const labelMarca = document.querySelector("#labelMarca_prod")
+
 
 
 //DIV ONDE FICA OS INPUTS NO CADASTRAR
@@ -28,17 +29,17 @@ const fecharX = document.querySelector("#fecharX");
 
 
 //INPUT CADASTRO
-const cpf = document.querySelector('#cpf');
-const nome = document.querySelector('#nome');
-const dtnascimento = document.querySelector('#dtnascimento');
-const sobrenome = document.querySelector('#sobrenome');
-const rg = document.querySelector('#rg');
+const marca_prod = document.querySelector('#marca_prod');
+const nome_prod = document.querySelector('#nome_produto');
+const dtfabricacao = document.querySelector('#dtfabricacao');
+const descricao_prod = document.querySelector('#descricao_prod');
+const preco_produto = document.querySelector('#preco_prod');
 
-const cpfEditar = document.querySelector('#cpfEditar');
-const nomeEditar = document.querySelector('#nomeEditar');
-const dtnascimentoEditar = document.querySelector('#dtnascimentoEditar');
-const sobrenomeEditar = document.querySelector('#sobrenomeEditar');
-const rgEditar = document.querySelector('#rgEditar');
+const marca_prod_Editar = document.querySelector('#estoque_prodEditar');
+const nome_prod_Editar = document.querySelector('#nome_prodEditar');
+const dtfabricacaoEditar = document.querySelector('#dtfabricacaoEditar');
+const descricao_prod_Editar = document.querySelector('#descricao_prodEditar');
+const preco_produto_Editar = document.querySelector('#preco_prodEditar');
 
 //CONFIGURAÇÕES DOS PARAMENTRO DE VALIDAÇÃO DO FORMULÁRIO
   $('#frm').validate({
@@ -72,10 +73,10 @@ const rgEditar = document.querySelector('#rgEditar');
  
 async function deleta(id) {
 
-    document.getElementById('idcliente').value = id;
-    idcliente =document.getElementById('idcliente').value;
+    document.getElementById('idproduto').value = id;
+    idproduto =document.getElementById('idproduto').value;
 
-    const response = await fetch(`/deletarcliente/${idcliente}`);
+    const response = await fetch(`/deletarproduto/${idproduto}`);
 
 
     atualizar()
@@ -83,31 +84,34 @@ async function deleta(id) {
 
 async function alterar(id) {
     document.getElementById('acao').value = 'update';
-    const clientes = await lista_cliente()
-    const busca = clientes.find(function(elemento){
+    const produtos = await lista_produto()
+    const busca = produtos.find(function(elemento){
         return elemento.id==id
     })
     
-    
-    const nomeEditar = busca.nome;
-    const sobrenomeEditar = busca.sobrenome;
-    const cpfEditar = busca.cpf;
-    const rgEditar = busca.rg;
-    const dtnascimentoEditar = busca.dtnascimento;
+
+    const marca_prod_Editar = busca.marca;
+    const nome_prod_Editar = busca.nome;
+    const dtfabricacaoEditar = busca.dtfabricacao;
+    const descricao_prod_Editar = busca.descricao;
+    const preco_prod_Editar = busca.preco;
+
+
    
 
     $("#acao").val('update');
     $("#idEditar").val(id);
-    $("#nomeEditar").val(nomeEditar);
-    $("#sobrenomeEditar").val(sobrenomeEditar);
-    $("#cpfEditar").val(cpfEditar);
-    $("#rgEditar").val(rgEditar);
-    $("#dtnascimentoEditar").val(dtnascimentoEditar);
+    $("#nome_produtoEditar").val(nome_prod_Editar);
+    $("#descricao_prodEditar").val(descricao_prod_Editar);
+    $("#marca_prodEditar").val(marca_prod_Editar);
+    $("#dtfabricacaoEditar").val(dtfabricacaoEditar);
+    $("#preco_prodEditar").val(preco_prod_Editar);
+
 
     
 
     //exibimos o modal
-    $("#editarcliente").modal('show');
+    $("#editarproduto").modal('show');
 }
 
 async function update() {
@@ -123,16 +127,16 @@ async function update() {
         cache: 'default'
 
     };
-    const response = await fetch(`/atualizarcliente/${id}`,opt);
+    const response = await fetch(`/atualizarproduto/${id}`,opt);
    
         atualizar();
         //ocultamos o modal
-        $("#editarcliente").modal('hide');
+        $("#editarproduto").modal('hide');
 
     
 }
 
-async function lista_cliente() {
+async function lista_produto() {
    
        
       const opt = {
@@ -143,7 +147,7 @@ async function lista_cliente() {
     
     //A VARIAVEL response RECEBERÁ UMA PROMISSE
     //DE UMA TENTATIVA DE REQUISIÇÃO.
-    const response = await fetch('/listarcliente') 
+    const response = await fetch('/listarproduto') 
     
     
     //CONVERTEMOS O A RESPOSTA  PARA TEXTO
@@ -155,22 +159,22 @@ async function lista_cliente() {
     return html
 }
 async function atualizar(){
-   const clientes = await lista_cliente();
+   const produtos = await lista_produto();
    dados = "";
-   clientes.forEach(cliente => {
-     dados +=`<tr id='tr ${cliente.id}'>
-    <td> ${cliente.id}</td>
-    <td> ${cliente.nome} </td>
-    <td> ${cliente.sobrenome} </td>
-    <td> ${cliente.cpf}</td>
-    <td> ${cliente.rg} </td>
-    <td> ${cliente.dtnascimento}</td>
+   produtos.forEach(produto => {
+     dados +=`<tr id='tr ${produto.id}'>
+    <td> ${produto.id}</td>
+    <td> ${produto.nome} </td>
+    <td> ${produto.marca} </td>
+    <td> ${produto.descricao}</td>
+    <td> ${produto.preco} </td>
+    <td> ${produto.dtfabricacao}</td>
     <td>
     <div class='btn-group' role='group'>
-    <button type='button' onclick='alterar(${cliente.id})' type='button' class='btn btn-warning'>
+    <button type='button' onclick='alterar(${produto.id})' type='button' class='btn btn-warning'>
     <i class='fa-solid fa-pen-to-square'> </i> Editar
     </button>
-    <button onclick='deleta(${cliente.id});' type='button' class='btn btn-danger'>
+    <button onclick='deleta(${produto.id});' type='button' class='btn btn-danger'>
     <i class='fa-solid fa-trash'> </i> Excluir
     </div>
     </td>
@@ -192,7 +196,7 @@ async function inserir() {
         body: formData,
         cache: 'default'
     }
-     await fetch('/cadastrarcliente', opt)
+     await fetch('/cadastrarproduto', opt)
     
    
     //VARIFICAMOS SE A RESPOSTA DO PHP OU SERVER É TRUE
@@ -208,7 +212,7 @@ async function inserir() {
         //aguardamos 0,5 seg para fechar o modal
         setTimeout(() => {
             //fecha o modal
-            $("#cadastrocliente").modal('hide');
+            $("#cadastroproduto").modal('hide');
             $("#frm input").val('');
             $("#alerta").removeClass('alert alert-success');
             $('#alerta').addClass('alert alert-warning');
@@ -260,11 +264,11 @@ salvar.addEventListener('click', function () {
             setTimeout(() => {
                 update();
 
-                cpf.classList.remove('is-valid')
-                nome.classList.remove('is-valid')
-                dtnascimento.classList.remove('is-valid')
-                rg.classList.remove('is-valid')
-                sobrenome.classList.remove('is-valid')
+                marca_prod.classList.remove('is-valid')
+                nome_prod.classList.remove('is-valid')
+                dtfabricacao.classList.remove('is-valid')
+                preco_produto.classList.remove('is-valid')
+                descricao_prod.classList.remove('is-valid')
 
                 carregando.classList.add('d-none');
                 titulo.classList.remove('d-none')
@@ -283,11 +287,11 @@ salvar.addEventListener('click', function () {
                 
                 
 
-                cpf.classList.remove('is-valid')
-                nome.classList.remove('is-valid')
-                dtnascimento.classList.remove('is-valid')
-                rg.classList.remove('is-valid')
-                sobrenome.classList.remove('is-valid')
+                marca_prod.classList.remove('is-valid')
+                nome_prod.classList.remove('is-valid')
+                dtfabricacao.classList.remove('is-valid')
+                preco_produto.classList.remove('is-valid')
+                descricao_prod.classList.remove('is-valid')
 
                 carregando.classList.add('d-none');
                 titulo.classList.remove('d-none')
@@ -306,23 +310,24 @@ salvar.addEventListener('click', function () {
 // QUANDO CLICAR NO BOTÃO FECHAR PARA FECHAR O FORMULÁRION IRÁ VAI LIMPAR O FORMULÁRIO
 fechar.addEventListener('click', () => {
 
-
-    cpf.classList.remove('is-valid')
-    nome.classList.remove('is-valid')
-    dtnascimento.classList.remove('is-valid')
-    rg.classList.remove('is-valid')
-    sobrenome.classList.remove('is-valid')
-
-    nome.classList.remove('is-invalid')
-    sobrenome.classList.remove('is-invalid')
-    rg.classList.remove('is-invalid')
-    dtnascimento.classList.remove('is-invalid')
+    
+    marca_prod.classList.remove('is-valid')
+    nome_prod.classList.remove('is-valid')
+    dtfabricacao.classList.remove('is-valid')
+    preco_produto.classList.remove('is-valid')
+    descricao_prod.classList.remove('is-valid')
+    
+    nome_prod.classList.remove('is-invalid')
+    marca_prod.classList.remove('is-invalid')
+    dtfabricacao.classList.remove('is-invalid')
+    preco_produto.classList.remove('is-invalid')
+    descricao_prod.classList.remove('is-invalid')
     if(document.getElementById('acao').value == 'insert'){
-        cpf.value = ''
-        nome.value = ''
-        sobrenome.value = ''
-        rg.value = ''
-        dtnascimento.value = ''
+        marca_prod.value = ''
+        nome_prod.value = ''
+        descricao_prod.value = ''
+        preco_produto.value = ''
+        descricao_prod.value = ''
         }
 
     carregando.classList.add('d-none');
@@ -336,22 +341,23 @@ fecharX.addEventListener('click', () => {
     
 
 
-    cpf.classList.remove('is-valid')
-    nome.classList.remove('is-valid')
-    dtnascimento.classList.remove('is-valid')
-    rg.classList.remove('is-valid')
-    sobrenome.classList.remove('is-valid')
+    marca_prod.classList.remove('is-valid')
+    nome_prod.classList.remove('is-valid')
+    dtfabricacao.classList.remove('is-valid')
+    preco_produto.classList.remove('is-valid')
+    descricao_prod.classList.remove('is-valid')
 
-    nome.classList.remove('is-invalid')
-    sobrenome.classList.remove('is-invalid')
-    rg.classList.remove('is-invalid')
-    dtnascimento.classList.remove('is-invalid')
+    nome_prod.classList.remove('is-invalid')
+    marca_prod.classList.remove('is-invalid')
+    dtfabricacao.classList.remove('is-invalid')
+    preco_produto.classList.remove('is-invalid')
+    descricao_prod.classList.remove('is-invalid')
     if(document.getElementById('acao').value == 'insert'){
-        cpf.value = ''
-        nome.value = ''
-        sobrenome.value = ''
-        rg.value = ''
-        dtnascimento.value = ''
+        marca_prod.value = ''
+        nome_prod.value = ''
+        descricao_prod.value = ''
+        preco_produto.value = ''
+        descricao_prod.value = ''
         }
 
     carregando.classList.add('d-none');
@@ -359,7 +365,4 @@ fecharX.addEventListener('click', () => {
 
 })
 
-$("#cpf").inputmask({
-    mask: '999.999.999-99'
-});
 

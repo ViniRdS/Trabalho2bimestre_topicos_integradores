@@ -13,7 +13,7 @@
     {% include "nav.html" %}
     
     <!-- Modal -->
-    <div class="modal fade" id="cadastrocliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="cadastroproduto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -53,31 +53,31 @@
                             <div class="col-12">
                                 <div id="inputs" class="">
                                     <div class="form-group">
-                                        <label for="cpf_cnpj" class="form-label" id="labelCpf_Cnpj">{{ cpf_nome }}</label>
-                                        <input type="text" class="form-control" id="cpf_cnpj" name="cpf_cnpj" required>
+                                        <label for="nome_produto" class="form-label" id="labelcod_produto">{{  nome_prod }}</label>
+                                        <input type="text" class="form-control" id="nome_produto" name="nome_produto" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="nome_fantasia" class="form-label" id="labelNome_Fantasia">{{ nome_marca }}</label>
-                                        <input type="text" class="form-control" id="nome_fantasia" name="nome_fantasia"
-                                            required minlength="3">
+                                        <label for="marca_prod" class="form-label" id="labelMarca_prod">{{ marca }}</label>
+                                        <input type="text" class="form-control" id="marca_prod" name="marca_prod"
+                                            required >
                                     </div>
                                     <div class="form-group">
-                                        <label for="sobrenome_razao" class="form-label"
-                                            id="labelSobrenome_Razao">{{ sobrenome_descricao }}</label>
-                                        <input type="text" class="form-control" id="sobrenome_razao"
-                                            name="sobrenome_razao" required minlength="3">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="rg_ie" class="form-label" id="labelRg_Ie">{{ rg_preco }}</label>
-                                        <input type="{{ type_rg_preco }}" class="form-control" id="rg_ie" name="rg_ie" minlength="6">
+                                        <label for="descricao_prod" class="form-label"
+                                            id="labelDescricao_Prod">{{ descricao_prod }}</label>
+                                        <textarea type="text" class="form-control" id="descricao_prod"
+                                            name="descricao_prod" required ></textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="dtnascimento_abertura" class="form-label"
-                                            id="labelDtNascimento_Abertura">{{ dataNascimento_fabricacao }}</label>
-                                        <input type="date" class="form-control" id="dtnascimento_abertura"
-                                            name="dtnascimento_abertura" required>
+                                        <label for="preco_prod" class="form-label" id="labelPreco_Prod">{{ preco }}</label>
+                                        <input type="number" class="form-control" id="preco_prod" name="preco_prod"> 
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dtfabricacao" class="form-label"
+                                            id="labelDtfabricacao">{{ datafabricacao }}</label>
+                                        <input type="date" class="form-control" id="dtfabricacao"
+                                            name="dtfabricacao" required>
                                     </div>
                                 </div>
                             </div>
@@ -96,15 +96,98 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="editarproduto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" name="frmEditar" id="frmEditar">
+                    <input type="text" id="idEditar" name="idEditar">
+                    <input type="text" id="acao" name="acao">
+                    <input type="text" id="tipo" name="tipo" class="esconder">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Editar produto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            id="fecharX"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- AQUI TEMOS UMA LINHA -->
+                        <div class="row">
+                            <!-- AQUI TEMOS UMA COLUNA OCUPANDO 100% DO TAMANHO DA LINHA -->
+                            <div class="col-12">
+                                <!-- AQUI TEMOS O COMPONENTE ALERT -->
+                                <div id="alerta" class="alert alert-warning" role="alert">
+                                    <!-- AQUI TEMOS O TITULO DO ALERT DO BOOTSTRAP -->
+                                    <div id="titulo" class="mb-0">
+                                        <h6 class="alert-heading">Atenção!</h6>
+                                        Todos os campos com <span class="text-danger"> * </span> são obrigatórios para o
+                                        cadastro!
+                                    </div>
+                                    <!-- AQUI TEMOS SPINNER PARA MENSAGEM DE SALVANDO -->
+                                    <div id="carregando" class="mb-0 d-none">
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <span>Salvando...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="inputs" class="">
+                                    <div class="form-group">
+                                        <label for="nome_produtoEditar" class="form-label" id="labelcod_produtoEditar">{{  nome_prod }}</label>
+                                        <input type="text" class="form-control" id="nome_produtoEditar" name="nome_produtoEditar" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="marca_prodEditar" class="form-label" id="labelNome_prodEditar">{{ marca }}</label>
+                                        <input type="text" class="form-control" id="marca_prodEditar" name="marca_prodEditar"
+                                            required >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="descricao_prodEditar" class="form-label"
+                                            id="labelDescricao_ProdEditar">{{ descricao_prod }}</label>
+                                        <textarea type="text" class="form-control" id="descricao_prodEditar"
+                                            name="descricao_prodEditar" required ></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="preco_prodEditar" class="form-label" id="labelPreco_ProdEditar">{{ preco }}</label>
+                                        <input type="number" class="form-control" id="preco_prodEditar" name="preco_prodEditar"> 
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dtfabricacaoEditar" class="form-label"
+                                            id="labelDtfabricacaoEditar">{{ datafabricacao }}</label>
+                                        <input type="date" class="form-control" id="dtfabricacaoEditar"
+                                            name="dtfabricacaoEditar" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="fecharEditar">
+                            <i class="fa-solid fa-xmark"> </i> Fechar
+                        </button>
+                        <button id="btnsalvarEditar" type="button" class="btn btn-success">
+                            <i class="fa-solid fa-floppy-disk"></i> Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="container" id="container">
-        <form id="clientes" name="clientes">
-            <input type="text" name="idcliente" id="idcliente">
+        <form id="produtos" name="produtos">
+            <input type="text" name="idproduto" id="idproduto" class="esconder">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <button id="btncadastro" type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#cadastrocliente">
+                                data-bs-target="#cadastroproduto">
                                 <i class="fa-solid fa-plus"> </i> Cadastrar
                             </button>
                             <button id="btnatualiza" type="button" class="btn btn-primary">
@@ -137,7 +220,25 @@
                                     </tr>
                                 </thead>
                                 <tbody id="dados" class="table-group-divider">
-
+                                    {% for produtos in produtos %}
+                                    <tr id="tr{{produtos.id}}">
+                                        <td>{{produtos.id}}</td>
+                                        <td>{{produtos.nome}}</td>
+                                        <td>{{produtos.marca}}</td>
+                                        <td>{{produtos.descricao}}</td>
+                                        <td>{{produtos.preco}}</td>
+                                        <td>{{produtos.dtfabricacao}}</td>
+                                        <td>
+                                            <div class='btn-group' role='group'>
+                                            <button type='button' onclick='alterar(id)' type='button' class='btn btn-warning'>
+                                            <i class='fa-solid fa-pen-to-square'> </i> Editar
+                                            </button>
+                                            <button onclick='deleta(id);' type='button' class='btn btn-danger'>
+                                            <i class='fa-solid fa-trash'> </i> Excluir
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -150,6 +251,7 @@
     </div>
 
     {% include "script.html" %}
+    <script src="/assets/js/produto.js"></script>
 </body>
 
 </html>
