@@ -176,6 +176,9 @@ async function atualizar(){
     </button>
     <button onclick='deleta(${produto.id});' type='button' class='btn btn-danger'>
     <i class='fa-solid fa-trash'> </i> Excluir
+    </button>
+    <button onclick='deleta(${produto.id});' type='button' class='btn btn-primary'>
+    <i class='fa-solid fa-basket-shopping'> </i> Comprar
     </div>
     </td>
     </tr>`

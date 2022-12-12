@@ -66,3 +66,14 @@ body{
     display: flex;
     justify-content: center;
 }
+#inputQuant{
+    width: 85px;
+    text-align: center;
+}
+#inputTotalVenda{
+    width: 200px;
+    text-align: center;
+}
+#Tabelacabecalho{
+    text-align: center;
+}
