@@ -45,14 +45,14 @@
                             </tr>
                         </thead>
                         <tbody id="dados" class="table-group-divider">
-                            {% for produtos in produtos %}
-                            <tr id="tr{{produtos.id}}">
-                                <td>{{produtos.id}}</td>
-                                <td>{{produtos.nome}}</td>
-                                <td>{{produtos.marca}}</td>
-                                <td>{{produtos.descricao}}</td>
-                                <td>{{produtos.preco}}</td>
-                                <td>{{produtos.dtfabricacao}}</td>
+                            {% for vendas in vendas %}
+                            <tr id="tr{{vendas.id}}">
+                                <td>{{vendas.id}}</td>
+                                <td>{{vendas.nome}}</td>
+                                <td>{{vendas.dtvenda}}</td>
+                                <td>{{vendas.descricao}}</td>
+                                <td>{{vendas.precoproduto}}</td>
+                                <td>{{vendas.dtfabricacao}}</td>
                                 <td>
                                     <div class='btn-group' role='group'>
                                         <button type='button' onclick='alterar(id)' type='button'

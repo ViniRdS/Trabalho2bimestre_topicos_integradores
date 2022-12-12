@@ -217,6 +217,7 @@ async function inserir() {
             //fecha o modal
             $("#cadastroproduto").modal('hide');
             $("#frm input").val('');
+            $("#descricao_prod").val('');
             $("#alerta").removeClass('alert alert-success');
             $('#alerta').addClass('alert alert-warning');
             $("#titulo").removeClass('d-none');
