@@ -25,3 +25,4 @@ $app->get('/carrinho', ControllerCarrinho::class . ':carrinho');
 $app->post('/adicionarcarrinho', ControllerCarrinho::class . ':adicionarcarrinho');
 $app->any('/deletarprodutoCarrinho/{id}', ControllerCarrinho::class . ':deleteprodutoCarrinho');
 $app->any('/deletarCarrinho', ControllerCarrinho::class . ':deleteTudo');
+$app->get('/listarcarrinho', ControllerCarrinho::class . ':readcarrinho');

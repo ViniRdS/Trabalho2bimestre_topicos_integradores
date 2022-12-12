@@ -148,11 +148,11 @@ async function lista_cliente() {
     
     //CONVERTEMOS O A RESPOSTA  PARA TEXTO
     //QUE TERÁ UMA ESTRUTURA HTML
-    const html = await response.json();
+    const json = await response.json();
     //console.log(html);
     //PRINTAMOS NO CONSOLE O RESULTADO
    
-    return html
+    return json
 }
 async function atualizar(){
    const clientes = await lista_cliente();

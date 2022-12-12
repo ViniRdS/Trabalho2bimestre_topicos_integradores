@@ -65,4 +65,9 @@ class ControllerCarrinho extends Base
        return $response;
                  
     }
+    public function readcarrinho($request, $response){
+        $carrinho=$this->carrinho->findJoinCarrinho();
+	    echo json_encode($carrinho);
+        return $response;     
+    }
 }
