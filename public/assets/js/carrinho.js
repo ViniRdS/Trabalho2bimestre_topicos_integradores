@@ -36,6 +36,10 @@ async function total() {
     total += JSON.parse(item.preco)
     
    });
+   if (total != 0) {
+   
+   total= total.toFixed(2)
+}
    inputTotalVenda.value = total
    idtotal.value = total
    
@@ -64,5 +68,6 @@ async function confirmar() {
         cache: 'default'
     }
      await fetch('/adicionarvenda', opt)
+     deletaTudo()
     }
 }

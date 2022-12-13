@@ -9,6 +9,7 @@ use app\controllers\ControllerCarrinho;
 
 $app->get('/', ControllerHome::class . ':home');
 $app->get('/cliente', ControllerCliente::class . ':listacliente');
+$app->get('/imprimir', ControllerVenda::class . ':imprimir');
 $app->get('/venda', ControllerVenda::class . ':venda');
 $app->post('/cadastrarcliente', ControllerCliente::class . ':criarCliente');
 $app->get('/listarcliente', ControllerCliente::class . ':readCliente');
