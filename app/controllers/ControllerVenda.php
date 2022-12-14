@@ -173,6 +173,13 @@ font-size: 30px;'>Lista de Produtos</h2>
     </tr>
 </tbody>
 </table>
+    <div style='background-color: white;'>
+    <h6 style='width: 90%;
+    display: flex;
+    text-align: center;
+    margin: 20px 60px 10px 30px;
+    justify-content: center;'>Desenvolvido por Horse Corporation®</h6>
+    </div>
 
         ";
         $htmlFinal = "";
